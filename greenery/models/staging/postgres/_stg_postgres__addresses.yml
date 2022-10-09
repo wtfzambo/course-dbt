@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: Contains a list of unique street addresses
+    columns:
+      # should name of column be the original one or the new one
+      # after renaming in the .sql file? 
+      - name: address_guid
+        tests:
+          - not_null
+          - unique

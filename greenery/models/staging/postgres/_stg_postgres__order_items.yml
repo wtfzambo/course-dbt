@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_postgres__order_items
+    description:
+      Contains quantity of each item ordered and respective order id
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+      - name: product_guid
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - positive_values

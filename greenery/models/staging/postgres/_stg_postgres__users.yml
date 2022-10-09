@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_postgres__users
+    description:
+      Info about all users of Greenery platform
+    columns:
+      - name: user_guid
+        tests:
+          - not_null
+          - unique

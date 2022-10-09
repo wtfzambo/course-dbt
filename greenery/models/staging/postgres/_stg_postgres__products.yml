@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: stg_postgres__products
+    description:
+      Price and quantity of each product in inventory
+    columns:
+      - name: product_guid
+        tests:
+          - not_null
+          - unique
+      - name: product_price
+        tests: 
+          - positive_values

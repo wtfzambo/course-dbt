@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_postgres__orders
+    description:
+      Contains details (cost, status, delivery...) about each order 
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+          - unique
+      - name: user_guid
+        tests:
+          - not_null
+      - name: address_guid
+        tests:
+          - not_null
+      # how to define same test for these 3 different columns without
+      # repeating oneself? Does jinja work here?
+      - name: order_cost
+        tests:
+          - positive_values
+      - name: shipping_cost
+        tests:
+          - positive_values
+      - name: order_total
+        tests:
+          - positive_values

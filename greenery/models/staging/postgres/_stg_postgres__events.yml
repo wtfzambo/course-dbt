@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_postgres__events
+    description:
+      Clickstream of actions that users perform on Greenery platform
+    columns:
+      - name: event_guid
+        tests:
+          - not_null
+          - unique
+      - name: session_guid
+        tests:
+          - not_null
+      - name: user_guid
+        tests:
+          - not_null

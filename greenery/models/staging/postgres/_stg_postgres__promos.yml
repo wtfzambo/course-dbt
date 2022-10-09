@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: stg_postgres__promos
+    description:
+      List of all active and inactive promos
+    columns:
+      - name: promo_id
+        tests:
+          - not_null
+          - unique
+      - name: promo_discount
+        description:
+          Value is in absolute dollar amount

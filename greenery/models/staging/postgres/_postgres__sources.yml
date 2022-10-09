@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+
+  - name: postgres
+    database: raw
+    schema: public
+
+    tables:
+      - name: addresses
+        description: Contains a list of unique street addresses
+
+      - name: events
+        description: >
+          Clickstream of actions that users perform on Greenery platform
+
+      - name: order_items
+        description:
+          Contains quantity of each item bought for each order
+
+      - name: orders
+        description:
+          Contains details (cost, status, delivery...) about each order
+
+      - name: products
+        description: Price and quantity of each product in inventory
+
+      - name: promos
+        description: List of all active and inactive promos
+
+      - name: users
+        description: Info about all users of Greenery platform
+
+    # quoting:
+    #   database: false
+    #   schema: false
+    #   identifier: false
+
+    # freshness:
+    #   warn_after: {count: 24, period: hour}
+    #   error_after: {count: 48, period: hour}
+
+      # - name: superheroes 
+      #   loaded_at_field: created_at
+      #   description: >
+      #     Contains demographic information about each superhero 
