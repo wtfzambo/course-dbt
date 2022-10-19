@@ -31,11 +31,6 @@ sources:
       - name: users
         description: Info about all users of Greenery platform
 
-    # quoting:
-    #   database: false
-    #   schema: false
-    #   identifier: false
-
     # freshness:
     #   warn_after: {count: 24, period: hour}
     #   error_after: {count: 48, period: hour}

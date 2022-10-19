@@ -7,7 +7,7 @@ orders_source AS (
 final AS (
 SELECT
        order_id AS order_guid
-     , promo_id AS promo_guid
+     , promo_id
      , user_id AS user_guid
      , address_id AS address_guid
      , created_at::TIMESTAMPNTZ AS created_at_utc

@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: >
+      This model is equal to `int_orders`, mostly because it seems already a complete model; 
+      it's been put in the fact layer to take advantage of materialization.
+      Contains detailed, up to date info about each order.
+    columns:
+      - name: order_guid
+        tests:
+          - unique
+          - not_null
+
+      - name: user_guid
+        tests:
+          - not_null
+
+      - name: order_cost
+        tests:
+          - positive_values
+
+      - name: shipping_cost
+        tests:
+          - positive_values
+
+      - name: order_total
+        tests:
+          - positive_values
+
+  - name: dim_products
+    description: >
+      Basic info about each product and statistics about sales, orders and session events.
+    columns:
+      - name: product_guid
+        tests:
+          - unique
+          - not_null
+
+      - name: product_price
+        tests:
+          - positive_values
+
+      - name: average_daily_orders
+        description: >
+          It's the daily average of how many orders included the product,
+          regardless of the total quantity bought.
+
+      - name: total_product_add_to_cart_events
+        description: >
+          How many times at least one SKU of the product has been added to cart, 
+          regardless of the total quantity bought.
+
+      - name: total_product_sold
+        description: Total number of SKUs sold.
+
+  - name: user_order_facts
+    description: >
+      Contains info about all users. Personal data, as well as website events 
+      and order stats.
+    columns:
+      - name: user_guid
+        tests:
+          - unique
+          - not_null
+
+      - name: user_lifetime_value
+        tests:
+          - positive_values
