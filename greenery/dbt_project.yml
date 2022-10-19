@@ -38,5 +38,9 @@ models:
         +materialized: view
     intermediate:
       +materialized: view
+      +docs:
+        node_color: '#273c75'
     marts:
       +materialized: view
+      +docs:
+        node_color: '#b33771'

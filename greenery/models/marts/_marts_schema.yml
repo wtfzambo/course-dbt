@@ -58,6 +58,8 @@ models:
     description: >
       Contains info about all users. Personal data, as well as website events 
       and order stats.
+    docs:
+      node_color: '#f97f51'
     columns:
       - name: user_guid
         tests:
