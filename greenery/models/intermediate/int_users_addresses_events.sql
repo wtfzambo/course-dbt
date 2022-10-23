@@ -2,17 +2,17 @@ WITH
 
 users AS (
     SELECT * FROM {{ ref('stg_postgres__users') }}
-),
+)
 
-addresses AS (
+, addresses AS (
     SELECT * FROM {{ ref('stg_postgres__addresses') }}
-),
+)
 
-events AS (
+, events AS (
     SELECT * FROM {{ ref('stg_postgres__events') }}
 )
 
-user_events AS (
+, user_events AS (
     SELECT user_guid
          , sum(iff(event_type = 'page_view', 1, 0)) AS total_user_pageviews
          , sum(iff(event_type = 'add_to_cart', 1, 0)) AS total_user_add_to_cart
