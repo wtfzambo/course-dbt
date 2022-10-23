@@ -56,3 +56,30 @@ models:
       - name: total_product_sold
         description: >
           Total number of SKUs sold.
+
+  - name: int_product_events
+    description: |
+      Event counts (e.g. pageviews, add to cart, etc...) for each unique product.
+
+      Add to cart and checkouts don't consider the quantity of SKUs ordered.
+      In other words, this means that 1 checkout could correspond to 1 SKUs as well as 10 SKUs bought in that single checkout.
+
+    columns:
+      - name: product_guid
+        tests:
+          - unique
+          - not_null
+
+  - name: int_session_user_events
+    description: |
+      Event counts (e.g. pageviews, add to cart, etc...) for each unique session.
+      Includes the `user_guid` for that session as well.
+    columns:
+      - name: session_guid
+        tests:
+          - unique
+          - not_null
+
+      - name: user_guid
+        tests:
+          - not_null

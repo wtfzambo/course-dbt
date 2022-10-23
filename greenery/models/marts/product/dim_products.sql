@@ -5,30 +5,22 @@ products AS (
 )
 
 , product_events AS (
-    SELECT * FROM {{ ref('stg_postgres__events') }}
-     WHERE product_guid IS NOT null
-)
-
-, product_events_totals AS (
-    SELECT product_guid
-        , sum(iff(event_type = 'page_view', 1, 0)) AS total_product_pageviews
-        , sum(iff(event_type = 'add_to_cart', 1, 0)) AS total_product_add_to_cart_events
-    FROM product_events
-    GROUP BY 1
+    SELECT * FROM {{ ref('int_product_events') }}
 )
 
 , final AS (
-    SELECT p.product_guid
-         , p.product_name
-         , p.product_price
-         , p.quantity_in_inventory
-         , p.average_daily_orders
-         , et.total_product_pageviews
-         , et.total_product_add_to_cart_events
-         , p.total_product_sold
-      FROM products AS p
-           LEFT JOIN product_events_totals AS et
-           USING (product_guid)
+    SELECT prods.product_guid
+         , prods.product_name
+         , prods.product_price
+         , prods.quantity_in_inventory
+         , prods.average_daily_orders
+         , prod_events.total_page_view
+         , prod_events.total_add_to_cart
+         , prod_events.total_checkout
+         , prods.total_product_sold
+      FROM products AS prods
+           LEFT JOIN product_events AS prod_events
+           ON prods.product_guid = prod_events.product_guid
 )
 
 SELECT * FROM final

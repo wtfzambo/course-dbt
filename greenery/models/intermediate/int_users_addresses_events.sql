@@ -9,12 +9,16 @@ addresses AS (
 ),
 
 events AS (
+    SELECT * FROM {{ ref('stg_postgres__events') }}
+)
+
+user_events AS (
     SELECT user_guid
          , sum(iff(event_type = 'page_view', 1, 0)) AS total_user_pageviews
          , sum(iff(event_type = 'add_to_cart', 1, 0)) AS total_user_add_to_cart
          , sum(iff(event_type = 'checkout', 1, 0)) AS total_user_checkouts
          , count(DISTINCT session_guid) AS total_user_sessions
-      FROM stg_postgres__events
+      FROM events
      GROUP BY 1
 )
 
@@ -38,5 +42,5 @@ SELECT
   FROM users AS u
        LEFT JOIN addresses AS a
        USING (address_guid)
-       LEFT JOIN events AS e
+       LEFT JOIN user_events AS e
        USING (user_guid)

@@ -44,3 +44,5 @@ models:
       +materialized: view
       +docs:
         node_color: '#b33771'
+      +post-hook:
+        - "{{ grant_select('reporting') }}"
