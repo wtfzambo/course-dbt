@@ -31,14 +31,14 @@ users AS (
     {%- 
         set column_names = dbt_utils.get_filtered_columns_in_relation(
             from = ref('int_session_user_events'),
-            except = ["session_guid", "user_guid"]
+            except = ["session_guid", "user_guid", "did_package_shipped"]
             ) 
     %}
     SELECT
         user_guid
         , count(distinct session_guid) as total_sessions
         {% for column_name in column_names -%}
-        , sum({{column_name}}) AS {{column_name}}
+        , sum({{column_name}}) AS total_sessions_with{{column_name[3:]}}
         {% endfor -%}
     FROM sessions_
     GROUP BY 1        
@@ -53,10 +53,9 @@ users AS (
         , user_orders.total_user_orders
         , user_orders.user_lifetime_value
         , session_stats.total_sessions
-        , session_stats.total_page_view
-        , session_stats.total_add_to_cart
-        , session_stats.total_checkout
-        , session_stats.total_package_shipped
+        , session_stats.total_sessions_with_page_view
+        , session_stats.total_sessions_with_add_to_cart
+        , session_stats.total_sessions_with_checkout
       FROM users
            LEFT JOIN orders_stats_per_user AS user_orders
            ON users.user_guid = user_orders.user_guid

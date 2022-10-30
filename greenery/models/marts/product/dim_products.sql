@@ -14,9 +14,10 @@ products AS (
          , prods.product_price
          , prods.quantity_in_inventory
          , prods.average_daily_orders
-         , prod_events.total_page_view
-         , prod_events.total_add_to_cart
-         , prod_events.total_checkout
+         , prods.average_daily_quantity_ordered
+         , prod_events.total_sessions_with_page_view
+         , prod_events.total_sessions_with_add_to_cart
+         , prod_events.total_sessions_with_checkout
          , prods.total_product_sold
       FROM products AS prods
            LEFT JOIN product_events AS prod_events

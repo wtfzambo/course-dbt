@@ -23,7 +23,7 @@ events AS (
     select
         product_guid
         {% for product_event in product_events -%}
-        , count(DISTINCT (CASE WHEN event_type = '{{product_event}}' THEN session_guid END)) AS total_{{product_event}}
+        , count(DISTINCT (CASE WHEN event_type = '{{product_event}}' THEN session_guid END)) AS total_sessions_with_{{product_event}}
         {% endfor -%}
     from event_order_items
     group by 1

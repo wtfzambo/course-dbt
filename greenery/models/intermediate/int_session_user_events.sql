@@ -10,7 +10,7 @@ events AS (
         session_guid
         , user_guid
         {% for event_type in event_types -%}
-        , sum(case when event_type = '{{event_type}}' then 1 else 0 end) as total_{{event_type}}
+        , count(distinct (case when event_type = '{{event_type}}' then session_guid end)) as did_{{event_type}}
         {% endfor -%}
     from events
     group by 1, 2

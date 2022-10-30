@@ -34,6 +34,7 @@ products AS (
 , product_stats AS (
     SELECT product_guid
          , avg(daily_orders_on_product) AS average_daily_orders
+         , avg(daily_total_ordered) AS average_daily_quantity_ordered
          , sum(daily_total_ordered) AS total_product_sold
       FROM daily_totals
   GROUP BY 1
@@ -45,6 +46,7 @@ products AS (
          , p.product_price
          , p.quantity_in_inventory
          , s.average_daily_orders
+         , s.average_daily_quantity_ordered
          , s.total_product_sold
       FROM product_stats AS s
            LEFT JOIN products AS p

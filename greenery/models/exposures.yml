@@ -1,0 +1,20 @@
+version: 2
+
+
+exposures:
+  - name: sigma_greenery_dashboard
+    label: Sigma Greenery Dashboard
+    type: dashboard
+    maturity: high
+    url: https://app.sigmacomputing.com/corise-dbt/workbook/workbook-6mpkJQqT2OhAf5CImqQuwq
+    description: >
+      Fancy dashboard for greenery product funnel and extra stuff
+    
+    depends_on:
+      - ref('dim_products')
+      - ref('fct_orders')
+      - ref('user_order_facts')
+
+    owner:
+      name: Zambo
+      email: zambelli.federico@gmail.com
